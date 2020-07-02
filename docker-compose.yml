@@ -49,8 +49,8 @@ services:
       TWILIO_SID: AC2b2bb9b181180254a74eab9092395c18
       TWILIO_AUTH_TOKEN: 1faz3e67545bc7fd37085d6e12f59631
       TWILIO_MESSAGING_SERVICE_ID: MG2ac18bec5a5366scb82b4da07c81cc2e
-      AWS_ACCESS_KEY_ID: AKIAQBYKIITCUOJNG4H3
-      AWS_SECRET_ACCESS_KEY: V7rsDhWwRIewksEadFu4glhooHxG6T2+lGPT29ne
+      AWS_ACCESS_KEY_ID: fake
+      AWS_SECRET_ACCESS_KEY: fake
     tty: true
     entrypoint: ["npm", "run", "local"]
 networks:
