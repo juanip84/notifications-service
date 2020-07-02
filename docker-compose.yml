@@ -1,0 +1,58 @@
+version: "3.7"
+services:
+  local:
+    build:
+      context: .
+    image: notifications-component
+    volumes:
+      - ./src:/app/src
+    container_name: notifications-component_local
+    ports:
+      - 3000:3000
+      - 2345:2345
+      - 9229:9229
+    depends_on:
+      - localstack
+    environment:
+      NODE_ENV: local
+      REGION_SNS: us-east-1
+      TWILIO_SID: AC2b2bb9b181180254a74eab9092395c18
+      TWILIO_AUTH_TOKEN: 1faz3e67545bc7fd37085d6e12f59631
+      TWILIO_MESSAGING_SERVICE_ID: MG2ac18bec5a5366scb82b4da07c81cc2e
+      AWS_ACCESS_KEY_ID: fake
+      AWS_SECRET_ACCESS_KEY: fake
+    tty: true
+    entrypoint: ["npm", "run", "local"]
+  localstack:
+    image: localstack/localstack
+    container_name: notifications-component_localstack
+    environment:
+      SERVICES: sns
+      DEFAULT_REGION: us-east-2
+    ports:
+      - 8070:8080
+      - 4575:4575
+  dev:
+    build:
+      context: .
+    image: notifications-component
+    volumes:
+      - ./src:/app/src
+    container_name: notifications-component_dev
+    ports:
+      - 3000:3000
+      - 2345:2345
+      - 9229:9229
+    environment:
+      NODE_ENV: dev
+      REGION_SNS: us-east-1
+      TWILIO_SID: AC2b2bb9b181180254a74eab9092395c18
+      TWILIO_AUTH_TOKEN: 1faz3e67545bc7fd37085d6e12f59631
+      TWILIO_MESSAGING_SERVICE_ID: MG2ac18bec5a5366scb82b4da07c81cc2e
+      AWS_ACCESS_KEY_ID: AKIAQBYKIITCUOJNG4H3
+      AWS_SECRET_ACCESS_KEY: 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
+    tty: true
+    entrypoint: ["npm", "run", "local"]
+networks:
+  default:
+    name: notifications-component

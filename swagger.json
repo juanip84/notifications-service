@@ -1,0 +1,66 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Notifications Service API",
+    "description": "",
+    "license": {
+      "name": "Notifications service",
+      "url": "https://github.com/juanip84/notifications-service"
+    }
+  },
+  "host": "localhost:3000",
+  "schemes": ["http"],
+  "basePath": "/",
+  "paths": {
+    "/v1/sms": {
+      "post": {
+        "tags": ["SMS"],
+        "summary": "Send SMS",
+        "operationId": "post.sms",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "description": "SMS body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "description": "For specyfing provider, could be 'sns' or 'twilio'",
+                    "type": "string",
+                    "required": true
+                  },
+                  "phoneNumber": {
+                    "description": "In format +number'",
+                    "type": "string",
+                    "required": true
+                  },
+                  "msg": {
+                    "description": "msg to send'",
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Unknown server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}
