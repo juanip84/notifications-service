@@ -18,6 +18,10 @@ For this i used:
 
 The needed configuration of the app can be found in the `docker-compose.yml` file. 
 
+When running in a real way for SNS there is two ways of getting permissions:
+1- setting up accessKey and secretKet of an iam_user (could be programmatic) as environment variables 
+2- not defining those variables and just attach an iam_role to ECS service or EC2 instance (if running on AWS), and managing the permissions at role level (way more secure)
+
 ## Needed params to be sent
 
 channel: could be 'sns' or 'twilio'
